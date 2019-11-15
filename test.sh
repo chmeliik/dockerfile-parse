@@ -19,7 +19,7 @@ fi
 
 
 CONTAINER_NAME="dockerfile-parse-$OS-$OS_VERSION-py$PYTHON_VERSION"
-RUN="docker exec -ti $CONTAINER_NAME"
+RUN="docker exec -i $CONTAINER_NAME"
 if [[ $OS == "fedora" ]]; then
   PIP_PKG="python$PYTHON_VERSION-pip"
   PIP="pip$PYTHON_VERSION"
@@ -75,7 +75,7 @@ if [[ $PYTHON_VERSION -gt 2 ]]; then $RUN $PIP install -r requirements-py3.txt; 
 
 case ${ACTION} in
 "test")
-  TEST_CMD="py.test --cov dockerfile_parse --cov-report html -vv tests"
+  TEST_CMD="py.test --cov=dockerfile_parse --cov-report=html --color=yes -vv tests"
   ;;
 "bandit")
   $RUN $PKG install -y git-core
